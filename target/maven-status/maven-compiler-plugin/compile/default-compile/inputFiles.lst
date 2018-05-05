@@ -1,0 +1,12 @@
+/media/DATA/linux/facul/event-sourcing/src/main/java/es/example/model/Port.java
+/media/DATA/linux/facul/event-sourcing/src/main/java/es/example/event/DomainEvent.java
+/media/DATA/linux/facul/event-sourcing/src/main/java/es/example/model/Ship.java
+/media/DATA/linux/facul/event-sourcing/src/main/java/es/example/event/ArrivalEvent.java
+/media/DATA/linux/facul/event-sourcing/src/main/java/es/example/event/repository/EventStore.java
+/media/DATA/linux/facul/event-sourcing/src/main/java/es/example/event/DepartureEvent.java
+/media/DATA/linux/facul/event-sourcing/src/main/java/es/example/event/LoadEvent.java
+/media/DATA/linux/facul/event-sourcing/src/main/java/es/example/event/manager/EventManager.java
+/media/DATA/linux/facul/event-sourcing/src/main/java/es/example/Loader.java
+/media/DATA/linux/facul/event-sourcing/src/main/java/es/example/model/Cargo.java
+/media/DATA/linux/facul/event-sourcing/src/main/java/es/example/model/ShipFactory.java
+/media/DATA/linux/facul/event-sourcing/src/main/java/es/example/event/UnloadEvent.java

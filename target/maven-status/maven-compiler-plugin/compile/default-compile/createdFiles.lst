@@ -1,0 +1,12 @@
+es/example/Loader.class
+es/example/event/repository/EventStore.class
+es/example/event/LoadEvent.class
+es/example/event/UnloadEvent.class
+es/example/event/manager/EventManager.class
+es/example/model/Port.class
+es/example/model/Ship.class
+es/example/model/ShipFactory.class
+es/example/event/ArrivalEvent.class
+es/example/model/Cargo.class
+es/example/event/DepartureEvent.class
+es/example/event/DomainEvent.class
