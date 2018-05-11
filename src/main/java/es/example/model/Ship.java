@@ -1,6 +1,6 @@
 package es.example.model;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,15 +12,19 @@ public class Ship {
     private Port port;
     private List<Cargo> cargos;
     
-    Ship(int id, String name, Port port, Cargo ...cargos) {
+    Ship(int id, String name, Port port) {
         this.id = id;
         this.name = name;
         this.port = port;
-        this.cargos = Arrays.asList(cargos);
+        this.cargos = new ArrayList<>();
     }
 
     public boolean addCargo(Cargo cargo) {
         return cargos.add(cargo);
+    }
+
+    public void emptyCargo() {
+        cargos.clear();
     }
 
     /**
@@ -70,13 +74,6 @@ public class Ship {
      */
     public void setPort(Port port) {
         this.port = port;
-    }
-
-    /**
-     * @param cargos the cargos to set
-     */
-    public void setCargos(List<Cargo> cargos) {
-        this.cargos = cargos;
     }
 
     @Override

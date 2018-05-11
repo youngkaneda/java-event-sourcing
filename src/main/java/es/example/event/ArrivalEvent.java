@@ -1,21 +1,23 @@
 package es.example.event;
 
 import es.example.model.Port;
-import es.example.model.Ship;
 
 /**
  * @author Juan
  */
-public class ArrivalEvent implements DomainEvent{
+public class ArrivalEvent extends DomainEvent{
 
     private Port port;
 
-    public ArrivalEvent(Port port) {
+    public ArrivalEvent(int shipId, Port port) {
+        super(System.currentTimeMillis(), shipId);
         this.port = port;
     }
 
-	@Override
-	public void process(Ship ship) {
-		ship.setPort(this.port);
-	}
+    /**
+     * @return the port
+     */
+    public Port getPort() {
+        return port;
+    }
 }

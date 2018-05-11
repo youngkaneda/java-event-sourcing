@@ -1,25 +1,23 @@
 package es.example.event;
 
-import java.util.Arrays;
-import java.util.List;
-
 import es.example.model.Cargo;
-import es.example.model.Ship;
 
 /**
  * @author Juan
  */
-public class LoadEvent implements DomainEvent { 
+public class LoadEvent extends DomainEvent { 
 
-    private List<Cargo> cargos;
+    private Cargo cargo;
 
-    public LoadEvent(Cargo ...cargos) {
-        this.cargos = Arrays.asList(cargos);
+    public LoadEvent(int shipId, Cargo cargo) {
+        super(System.currentTimeMillis(), shipId);        
+        this.cargo = cargo;
     }
 
-	@Override
-	public void process(Ship ship) {
-        this.cargos.stream().forEach((c) -> c.setShipId(ship.getId()));
-		ship.setCargos(this.cargos);
-	}
+    /**
+     * @return the cargo
+     */
+    public Cargo getCargo() {
+        return cargo;
+    }
 }

@@ -1,16 +1,11 @@
 package es.example.event;
 
-import es.example.model.Ship;
-
 /**
  * @author Juan
  */
-public class UnloadEvent implements DomainEvent{
+public class UnloadEvent extends DomainEvent {
 
-    public UnloadEvent() {}
-
-	@Override
-	public void process(Ship ship) {
-        ship.setCargos(null);
+	public UnloadEvent(int shipId) {
+        super(System.currentTimeMillis(), shipId);				
 	}
 }

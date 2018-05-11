@@ -1,11 +1,29 @@
 package es.example.event;
 
-import es.example.model.Ship;
-
 /**
  * @author Juan
  */
-public interface DomainEvent {
+public abstract class DomainEvent {
 
-    public void process(Ship ship);
+    private long createdIn;
+    private int shipId;
+
+    public DomainEvent(long timeMillis, int shipId) {
+        this.createdIn = timeMillis;
+        this.shipId = shipId;
+    }
+
+    /**
+     * @return the createdIn
+     */
+    public long getCreatedIn() {
+        return createdIn;
+    }
+
+    /**
+     * @return the shipId
+     */
+    public int getShipId() {
+        return shipId;
+    }
 }
