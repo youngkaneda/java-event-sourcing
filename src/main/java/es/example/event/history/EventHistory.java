@@ -28,7 +28,7 @@ public class EventHistory {
         Ship ship = shipFactory.getShip(shipId);
         List<DomainEvent> events = eventStore.getEvents(DomainEvent.class).stream()
                 .filter((ev) -> ev.getShipId() == shipId).collect(Collectors.toList());
-        // ...
+        events.forEach((ev) -> ev.applyOn(ship));
         return ship;
     }
 }

@@ -27,6 +27,8 @@ public class Loader {
         shipManager.unloadCargo(ship);
         System.out.println(ship);
         //System.out.println("Loading ship");
-        //...
+        EventHistory history = new EventHistory();
+        Ship loadedShip = history.loadShip(ship.getId());
+        System.out.println(loadedShip);
     }
 }

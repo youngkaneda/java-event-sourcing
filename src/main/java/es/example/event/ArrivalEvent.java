@@ -1,6 +1,7 @@
 package es.example.event;
 
 import es.example.model.Port;
+import es.example.model.Ship;
 
 /**
  * @author Juan
@@ -12,6 +13,10 @@ public class ArrivalEvent extends DomainEvent{
     public ArrivalEvent(int shipId, Port port) {
         super(System.currentTimeMillis(), shipId);
         this.port = port;
+    }
+
+    public void applyOn(Ship ship) {
+        ship.apply(this);
     }
 
     /**

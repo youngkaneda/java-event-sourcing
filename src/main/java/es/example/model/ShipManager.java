@@ -47,25 +47,4 @@ public class ShipManager {
     private void storeEvent(DomainEvent event) {
         evStore.store(event);
     }
-    
-    /*
-    the following methods are used to apply occured events on a ship, 
-    to get his state after the events occurrence
-    */
-
-    public void applyEvent(LoadEvent event, Ship ship) {
-        ship.addCargo(event.getCargo());
-    }
-
-    public void applyEvent(UnloadEvent event, Ship ship) {
-        ship.emptyCargo();
-    }
-
-    public void applyEvent(DepartureEvent event, Ship ship) {
-        ship.setPort(this.departurePort);
-    }
-
-    public void applyEvent(ArrivalEvent event, Ship ship) {
-        ship.setPort(event.getPort());
-    }
 }

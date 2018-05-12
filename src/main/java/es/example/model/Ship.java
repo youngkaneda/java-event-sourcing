@@ -3,6 +3,11 @@ package es.example.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.example.event.ArrivalEvent;
+import es.example.event.DepartureEvent;
+import es.example.event.LoadEvent;
+import es.example.event.UnloadEvent;
+
 /**
  * @author Juan
  */
@@ -17,6 +22,22 @@ public class Ship {
         this.name = name;
         this.port = port;
         this.cargos = new ArrayList<>();
+    }
+
+    public void apply(LoadEvent event) {
+        this.addCargo(event.getCargo());
+    }
+
+    public void apply(UnloadEvent event) {
+        this.emptyCargo();
+    }
+
+    public void apply(DepartureEvent event) {
+        this.setPort(event.getPort());
+    }
+
+    public void apply(ArrivalEvent event) {
+        this.setPort(event.getPort());
     }
 
     public boolean addCargo(Cargo cargo) {

@@ -1,5 +1,7 @@
 package es.example.event;
 
+import es.example.model.Ship;
+
 /**
  * @author Juan
  */
@@ -12,6 +14,8 @@ public abstract class DomainEvent {
         this.createdIn = timeMillis;
         this.shipId = shipId;
     }
+
+    public abstract void applyOn(Ship ship);
 
     /**
      * @return the createdIn
