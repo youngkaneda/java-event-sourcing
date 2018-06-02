@@ -1,4 +1,4 @@
-package es.example.event.repository;
+package es.example.event.store;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,19 +15,17 @@ public enum EventStore {
     private List<DomainEvent> events;
 
     public void store(DomainEvent event) {
-        if (events == null)
+        if (events == null) {
             events = new ArrayList<>();
+        }
         events.add(event);
     }
 
-    /**
-     * @return the events
-     */
     public List<DomainEvent> getEvents() {
         return events;
     }
 
     public List<DomainEvent> getEvents(Class eventType) {
-		return events.stream().filter((ev) -> eventType.isAssignableFrom(ev.getClass())).collect(Collectors.toList());
+        return events.stream().filter((ev) -> eventType.isAssignableFrom(ev.getClass())).collect(Collectors.toList());
     }
 }

@@ -8,21 +8,19 @@ import es.example.model.Ship;
  */
 public class DepartureEvent extends DomainEvent {
 
-	private Port port;
+	private final Port port;
 
-	public DepartureEvent(int shipId, Port port) {
-        super(System.currentTimeMillis(), shipId);		
-		this.port = port;
-	}
+    public DepartureEvent(int shipId, Port port) {
+        super(System.currentTimeMillis(), shipId);
+        this.port = port;
+    }
 
-	public void applyOn(Ship ship) {
+    @Override
+    public void applyOn(Ship ship) {
         ship.apply(this);
     }
 
-	/**
-	 * @return the port
-	 */
-	public Port getPort() {
-		return port;
-	}
+    public Port getPort() {
+        return port;
+    }
 }

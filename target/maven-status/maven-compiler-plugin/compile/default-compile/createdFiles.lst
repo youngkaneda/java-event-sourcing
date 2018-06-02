@@ -1,3 +1,4 @@
+es/example/event/NewShipEvent.class
 es/example/model/ShipManager.class
 es/example/event/LoadEvent.class
 es/example/event/history/EventHistory.class
@@ -5,9 +6,10 @@ es/example/event/DomainEvent.class
 es/example/Loader.class
 es/example/event/repository/EventStore.class
 es/example/event/UnloadEvent.class
+es/example/mq/AMQProducer.class
 es/example/model/Port.class
 es/example/model/Ship.class
-es/example/model/ShipFactory.class
+es/example/mq/ShipMessageListener.class
 es/example/event/ArrivalEvent.class
 es/example/model/Cargo.class
 es/example/event/DepartureEvent.class

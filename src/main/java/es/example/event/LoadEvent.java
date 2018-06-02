@@ -8,20 +8,18 @@ import es.example.model.Ship;
  */
 public class LoadEvent extends DomainEvent {
 
-    private Cargo cargo;
-
+    private final Cargo cargo;
+    
     public LoadEvent(int shipId, Cargo cargo) {
         super(System.currentTimeMillis(), shipId);
         this.cargo = cargo;
     }
 
+    @Override
     public void applyOn(Ship ship) {
         ship.apply(this);
     }
 
-    /**
-     * @return the cargo
-     */
     public Cargo getCargo() {
         return cargo;
     }

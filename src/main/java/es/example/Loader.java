@@ -4,31 +4,25 @@ import es.example.event.history.EventHistory;
 import es.example.model.Cargo;
 import es.example.model.Port;
 import es.example.model.Ship;
-import es.example.model.ShipFactory;
-import es.example.model.ShipManager;
+import es.example.commandes.ShipCommandImpl;
 
 /**
  * @author Juan
  */
 public class Loader {
+
     public static void main(String[] args) {
-        System.out.println("Creating a ship");
-        Ship ship = ShipFactory.INSTANCE.createShip("black pearl", new Port("port royal"));
-        ShipManager shipManager = new ShipManager();
         System.out.println("Processing a set of events");
-        shipManager.loadCargo(ship, new Cargo("rum", ship.getId()));
-        System.out.println(ship);
-        shipManager.loadCargo(ship, new Cargo("gunpowder", ship.getId()));
-        System.out.println(ship);
-        shipManager.departureShip(ship);
-        System.out.println(ship);  
-        shipManager.arrivalShip(ship, new Port("singapura"));
-        System.out.println(ship);
-        shipManager.unloadCargo(ship);
-        System.out.println(ship);
-        //System.out.println("Loading ship");
+        ShipCommandImpl shipManager = new ShipCommandImpl();
+        int shipId = shipManager.newShip("Black Pearl", new Port("Port Royal"));
+        shipManager.loadCargo(shipId, new Cargo("rum"));
+        shipManager.loadCargo(shipId, new Cargo("gunpowder"));
+        shipManager.departureShip(shipId);
+        shipManager.arrivalShip(shipId, new Port("singapura"));
+        shipManager.unloadCargo(shipId);
+        System.out.println("Loading ship");
         EventHistory history = new EventHistory();
-        Ship loadedShip = history.loadShip(ship.getId());
+        Ship loadedShip = history.loadShip(shipId);
         System.out.println(loadedShip);
     }
 }

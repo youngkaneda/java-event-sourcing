@@ -1,25 +1,29 @@
 package es.example.model;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * @author Juan
  */
-public class Port {
+@Entity
+public class Port implements Serializable {
+
+    @Id
     private String name;
-    
+
+    public Port() {
+    }
+
     public Port(String name) {
         this.name = name;
     }
 
-    /**
-     * @return the name
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name the name to set
-     */
     public void setName(String name) {
         this.name = name;
     }

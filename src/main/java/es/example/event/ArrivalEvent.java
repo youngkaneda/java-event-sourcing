@@ -8,20 +8,18 @@ import es.example.model.Ship;
  */
 public class ArrivalEvent extends DomainEvent{
 
-    private Port port;
-
+    private final Port port;
+    
     public ArrivalEvent(int shipId, Port port) {
         super(System.currentTimeMillis(), shipId);
         this.port = port;
     }
 
+    @Override
     public void applyOn(Ship ship) {
         ship.apply(this);
     }
 
-    /**
-     * @return the port
-     */
     public Port getPort() {
         return port;
     }
