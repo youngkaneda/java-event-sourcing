@@ -21,7 +21,7 @@ import javax.naming.NamingException;
  *
  * @author kuuhaku
  */
-public class AMQProducer {
+public class AMQProducer implements Producer{
 
     private Properties props;
     private Context ctx;
@@ -34,10 +34,8 @@ public class AMQProducer {
     public AMQProducer() {
         try {
             setConfig();
-        } catch (NamingException ex) {
-            throw new RuntimeException("error trying to set properties configuration: " + ex.getMessage());
-        } catch (JMSException ex) {
-            throw new RuntimeException("error involving the connection: " + ex.getMessage());
+        } catch (NamingException | JMSException ex) {
+            throw new RuntimeException(ex.getMessage());
         }
     }
 
@@ -56,13 +54,23 @@ public class AMQProducer {
         producer = session.createProducer(destination);
     }
 
-    public void sendMessage(String text) throws JMSException {
-        TextMessage message = session.createTextMessage(text);
-        producer.send(message);
+    @Override
+    public void send(String text) {
+        try {
+            TextMessage message = session.createTextMessage(text);
+            producer.send(message);
+        } catch (JMSException ex) {
+            throw new RuntimeException(ex.getMessage());
+        }
     }
     
-    public void close() throws JMSException {
-        session.close();
-        connection.close();
+    @Override
+    public void close() {
+        try {
+            session.close();
+            connection.close();
+        } catch (JMSException ex) {
+            throw new RuntimeException(ex.getMessage());
+        }
     }
 }

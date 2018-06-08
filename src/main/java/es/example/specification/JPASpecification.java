@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package es.example;
+package es.example.specification;
 
 /**
  *
  * @author kuuhaku
  */
-public class Loader {
-
-    public static void main(String[] args) {
-    }
+public interface JPASpecification extends Specification{
+    
+    public String toSqlQuery();
 }

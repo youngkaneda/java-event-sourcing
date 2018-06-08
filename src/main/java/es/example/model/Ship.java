@@ -3,37 +3,21 @@ package es.example.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.example.event.ArrivalEvent;
-import es.example.event.DepartureEvent;
-import es.example.event.LoadEvent;
-import es.example.event.NewShipEvent;
-import es.example.event.UnloadEvent;
-import java.io.Serializable;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
+import es.example.event.ArrivedShipEvent;
+import es.example.event.DeparturedShipEvent;
+import es.example.event.CargoLoadedEvent;
+import es.example.event.ShipCreatedEvent;
+import es.example.event.CargoUnloadedEvent;
 
 /**
- * @author Juan
+ * 
+ * @author kuuhaku
  */
-@Entity
-@SequenceGenerator(initialValue = 1, name = "ship_seq")
-public class Ship implements Serializable {
+public class Ship {
     
-    @Id
-    @GeneratedValue(generator = "ship_seq", strategy = GenerationType.SEQUENCE)
     private int id;
     private String name;
-    @OneToOne(cascade = CascadeType.ALL,
-            targetEntity = Port.class)
     private Port port;
-    @OneToMany(cascade = CascadeType.ALL,
-            targetEntity = Cargo.class)
     private List<Cargo> cargos;
     
     public Ship(){
@@ -46,27 +30,27 @@ public class Ship implements Serializable {
         this.port = port;
     }
 
-    public void apply(NewShipEvent event) {
+    public void apply(ShipCreatedEvent event) {
         this.setId(event.getShipId());
         this.setName(event.getName());
-        this.setPort(event.getPort());
+        this.setPort(new Port(event.getPort()));
         this.setCargos(new ArrayList<>());
     }
     
-    public void apply(LoadEvent event) {
-        this.addCargo(event.getCargo());
+    public void apply(CargoLoadedEvent event) {
+        this.addCargo(new Cargo(event.getCargo()));
     }
 
-    public void apply(UnloadEvent event) {
+    public void apply(CargoUnloadedEvent event) {
         this.emptyCargo();
     }
 
-    public void apply(DepartureEvent event) {
-        this.setPort(event.getPort());
+    public void apply(DeparturedShipEvent event) {
+        this.setPort(new Port(event.getPort()));
     }
 
-    public void apply(ArrivalEvent event) {
-        this.setPort(event.getPort());
+    public void apply(ArrivedShipEvent event) {
+        this.setPort(new Port(event.getPort()));
     }
 
     public boolean addCargo(Cargo cargo) {

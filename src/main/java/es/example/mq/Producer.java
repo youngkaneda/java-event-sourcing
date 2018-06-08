@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package es.example;
+package es.example.mq;
 
 /**
  *
  * @author kuuhaku
  */
-public class Loader {
-
-    public static void main(String[] args) {
-    }
+public interface Producer {
+    public void send(String text);
+    public void close();
 }

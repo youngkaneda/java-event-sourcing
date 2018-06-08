@@ -5,20 +5,26 @@
  */
 package es.example.event;
 
-import es.example.model.Port;
 import es.example.model.Ship;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 /**
  *
  * @author kuuhaku
  */
-public class NewShipEvent extends DomainEvent {
+@Entity
+@PrimaryKeyJoinColumn(name = "domain_ev")
+public class ShipCreatedEvent extends DomainEvent {
 
-    private final String name;
-    private final Port port;
+    private String name;
+    private String port;
+
+    public ShipCreatedEvent() {
+    }
     
-    public NewShipEvent(long timeMillis, int shipId, String name, Port port) {
-        super(timeMillis, shipId);
+    public ShipCreatedEvent(int shipId, String name, String port) {
+        super(System.currentTimeMillis(), shipId);
         this.name = name;
         this.port = port;
     }
@@ -32,7 +38,7 @@ public class NewShipEvent extends DomainEvent {
         return name;
     }
 
-    public Port getPort() {
+    public String getPort() {
         return port;
     }
 }

@@ -1,31 +1,47 @@
 package es.example.event.store;
 
-import java.util.ArrayList;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import es.example.event.DomainEvent;
+import es.example.event.repository.EventRepository;
+import es.example.event.repository.specification.AllEventsSpecification;
+import es.example.mq.Producer;
 
 /**
- * @author Juan
+ * 
+ * @author kuuhaku
  */
-public enum EventStore {
+public class EventStore {
 
-    INSTANCE;
-    private List<DomainEvent> events;
+    private final EventRepository<DomainEvent> repo;
+    private ObjectMapper mapper;
+    private final Producer producer;
 
+    public EventStore(EventRepository<DomainEvent> repo, Producer producer) {
+        this.repo = repo;
+        this.mapper = new ObjectMapper();
+        this.producer = producer;
+    }
+    
     public void store(DomainEvent event) {
-        if (events == null) {
-            events = new ArrayList<>();
-        }
-        events.add(event);
+        repo.save(event);
+        dispatch(event);
     }
 
     public List<DomainEvent> getEvents() {
-        return events;
+        return repo.query(new AllEventsSpecification());
     }
-
-    public List<DomainEvent> getEvents(Class eventType) {
-        return events.stream().filter((ev) -> eventType.isAssignableFrom(ev.getClass())).collect(Collectors.toList());
+    
+    private void dispatch(DomainEvent event) {
+        if(mapper == null)
+            mapper = new ObjectMapper();
+        try {
+            String jsonEvent = mapper.writeValueAsString(event);
+            producer.send(jsonEvent);
+        } catch (JsonProcessingException ex) {
+            throw new RuntimeException(ex.getMessage());
+        }
+        
     }
 }

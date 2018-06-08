@@ -1,16 +1,11 @@
 package es.example.model;
 
-import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
 /**
- * @author Juan
+ * 
+ * @author kuuhaku
  */
-@Entity
-public class Port implements Serializable {
+public class Port {
 
-    @Id
     private String name;
 
     public Port() {
