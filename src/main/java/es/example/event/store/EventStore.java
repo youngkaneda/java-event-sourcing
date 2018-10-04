@@ -28,6 +28,11 @@ public class EventStore {
         repo.save(event);
         dispatch(event);
     }
+    
+    public void close() {
+        repo.close();
+        producer.close();
+    }
 
     public List<DomainEvent> getEvents() {
         return repo.query(new AllEventsSpecification());
@@ -41,7 +46,6 @@ public class EventStore {
             producer.send(jsonEvent);
         } catch (JsonProcessingException ex) {
             throw new RuntimeException(ex.getMessage());
-        }
-        
+        }        
     }
 }

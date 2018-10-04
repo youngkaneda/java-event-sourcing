@@ -13,7 +13,7 @@ import javax.persistence.Persistence;
  *
  * @author kuuhaku
  */
-public class ConnFactory {
+public class PGConnFactory {
     
     private static EntityManagerFactory factory;
 

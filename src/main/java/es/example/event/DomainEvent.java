@@ -24,11 +24,13 @@ public abstract class DomainEvent implements Serializable{
     private int id;
     private long createdIn;
     private int shipId;
-
+    private String type;
+    
     public DomainEvent() {
     }
     
     public DomainEvent(long timeMillis, int shipId) {
+        this.type = getClass().getName();
         this.createdIn = timeMillis;
         this.shipId = shipId;
     }
@@ -41,5 +43,9 @@ public abstract class DomainEvent implements Serializable{
 
     public int getShipId() {
         return shipId;
+    }
+
+    public String getType() {
+        return type;
     }
 }

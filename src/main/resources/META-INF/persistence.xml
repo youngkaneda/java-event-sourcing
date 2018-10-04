@@ -5,21 +5,21 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-  <persistence-unit name="event_unit" transaction-type="RESOURCE_LOCAL">
-    <class>es.example.event.DomainEvent</class>
-    <class>es.example.event.ShipCreatedEvent</class>
-    <class>es.example.event.DeparturedShipEvent</class>
-    <class>es.example.event.CargoLoadedEvent</class>
-    <class>es.example.event.ArrivedShipEvent</class>
-    <class>es.example.event.CargoUnloadedEvent</class>
-    <properties>
-      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/event_sc"/>
-      <property name="javax.persistence.jdbc.user" value="postgres"/>
-      <property name="javax.persistence.jdbc.password" value="starcall"/>
-      <!-- EclipseLink should create the database schema automatically -->
-      <property name="eclipselink.ddl-generation" value="create-tables"/>
-      <property name="eclipselink.ddl-generation.output-mode" value="database"/>
-    </properties>
-  </persistence-unit>
+    <persistence-unit name="event_unit" transaction-type="RESOURCE_LOCAL">
+        <class>es.example.event.DomainEvent</class>
+        <class>es.example.event.ShipCreatedEvent</class>
+        <class>es.example.event.DeparturedShipEvent</class>
+        <class>es.example.event.CargoLoadedEvent</class>
+        <class>es.example.event.ArrivedShipEvent</class>
+        <class>es.example.event.CargoUnloadedEvent</class>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/event_sc"/>
+            <property name="javax.persistence.jdbc.user" value="postgres"/>
+            <property name="javax.persistence.jdbc.password" value="starcall"/>
+            <!-- EclipseLink should create the database schema automatically -->
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+            <property name="eclipselink.ddl-generation.output-mode" value="database"/>
+        </properties>
+    </persistence-unit>
 </persistence>

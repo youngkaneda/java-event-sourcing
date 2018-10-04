@@ -11,9 +11,8 @@ import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.MessageConsumer;
-import javax.jms.MessageProducer;
+import javax.jms.MessageListener;
 import javax.jms.Session;
-import javax.jms.TextMessage;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -22,7 +21,7 @@ import javax.naming.NamingException;
  *
  * @author kuuhaku
  */
-public class AMQProducer implements Producer{
+public class AMQConsumer implements Consumer{
 
     private Properties props;
     private Context ctx;
@@ -30,9 +29,9 @@ public class AMQProducer implements Producer{
     private Connection connection;
     private Session session;
     private Destination destination;
-    private MessageProducer producer;
+    private MessageConsumer consumer;
     
-    public AMQProducer(String topicName) {
+    public AMQConsumer(String topicName) {
         try {
             setConfig(topicName);
         } catch (NamingException | JMSException ex) {
@@ -52,19 +51,9 @@ public class AMQProducer implements Producer{
         connection.start();
         session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
         destination = (Destination) ctx.lookup("myTopic");
-        producer = session.createProducer(destination);
+        consumer = session.createConsumer(destination);
     }
 
-    @Override
-    public void send(String text) {
-        try {
-            TextMessage message = session.createTextMessage(text);
-            producer.send(message);
-        } catch (JMSException ex) {
-            throw new RuntimeException(ex.getMessage());
-        }
-    }
-    
     @Override
     public void close() {
         try {
@@ -74,4 +63,13 @@ public class AMQProducer implements Producer{
             throw new RuntimeException(ex.getMessage());
         }
     }
-}
+
+    @Override
+    public void setListener(MessageListener listener) {
+        try {
+            consumer.setMessageListener(listener);
+        } catch (JMSException ex) {
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+}    

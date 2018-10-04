@@ -5,17 +5,13 @@
  */
 package es.example.mq;
 
-import javax.jms.Message;
 import javax.jms.MessageListener;
 
 /**
  *
  * @author kuuhaku
  */
-public class ShipMessageListener implements MessageListener{
-    
-    @Override
-    public void onMessage(Message msg) {
-        //TODO handle the message
-    }
+public interface Consumer {
+    public void setListener(MessageListener listener);
+    public void close();
 }

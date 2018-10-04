@@ -14,16 +14,18 @@ import es.example.event.store.EventStore;
  */
 public class DepartureShipOrder extends Command {
 
+    private final int shipId;
     private final String port;
 
-    public DepartureShipOrder(EventStore eventStore, String port) {
+    public DepartureShipOrder(EventStore eventStore, int shipId, String port) {
         super(eventStore);
         this.port = port;
+        this.shipId = shipId;
     }
 
     @Override
     public void execute() {
-        DeparturedShipEvent event = new DeparturedShipEvent(0, port);
+        DeparturedShipEvent event = new DeparturedShipEvent(shipId, port);
         eventStore.store(event);
     }
 }

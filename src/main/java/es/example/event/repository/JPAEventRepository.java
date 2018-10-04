@@ -7,7 +7,7 @@ package es.example.event.repository;
 
 import es.example.specification.JPASpecification;
 import es.example.specification.Specification;
-import es.example.infra.ConnFactory;
+import es.example.infra.PGConnFactory;
 import es.example.event.DomainEvent;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -22,13 +22,13 @@ public class JPAEventRepository implements EventRepository<DomainEvent> {
     private final EntityManager em;
     
     public JPAEventRepository(String persistence_unit) {
-        em = ConnFactory.getConnection(persistence_unit);
+        em = PGConnFactory.getConnection(persistence_unit);
     }
 
     @Override
-    public void save(DomainEvent object) {
+    public void save(DomainEvent event) {
         em.getTransaction().begin();
-        em.persist(object);
+        em.persist(event);
         em.getTransaction().commit();
     }
 

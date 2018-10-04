@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package es.example.event.repository;
+package es.example.read.repository;
 
 import es.example.specification.Specification;
 import java.util.List;
@@ -12,11 +12,9 @@ import java.util.List;
  *
  * @author kuuhaku
  */
-public interface EventRepository<T> {
+public interface QueryRepository<T> {
     
-    public void save(T event);
+    public void update(T event);
     
     public List<T> query(Specification spec);
-    
-    public void close();
 }
