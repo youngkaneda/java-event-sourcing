@@ -15,6 +15,4 @@ java -cp target/classes/ es.example.Loader
 
 ## Future additions
 
-1. use a database to keep the events, and store the ships data.
-2. add the CQRS(Command Query Responsibility Segregation) pattern.
-3. Transfer all the project to a Docker containers environment
+1. Transfer all the project to a Docker containers environment
