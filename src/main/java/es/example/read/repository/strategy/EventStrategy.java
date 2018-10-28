@@ -56,14 +56,5 @@ public enum EventStrategy {
         this.value = value;
     }
 
-    public static EventStrategy fromString(String value) {
-        for (EventStrategy s : EventStrategy.values()) {
-            if (s.value.equalsIgnoreCase(value)) {
-                return s;
-            }
-        }
-        return null;
-    }
-
     public abstract void apply(JsonObject shipJson, JsonObject event);
 }

@@ -5,7 +5,6 @@
  */
 package es.example.read.repository;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mongodb.BasicDBObject;
@@ -48,7 +47,7 @@ public class MongoQueryRepository implements QueryRepository<JsonObject> {
 
     @Override
     public void update(JsonObject event) {
-        strategy = EventStrategy.fromString(event.get("type").getAsString());
+        strategy = EventStrategy.valueOf(event.get("type").getAsString());
         DBObject query = new BasicDBObject("shipId", event.get("shipId").getAsInt());
         DBCursor cursor = collection.find(query);
         //if the ship with the given id exist
