@@ -47,7 +47,7 @@ public class MongoQueryRepository implements QueryRepository<JsonObject> {
 
     @Override
     public void update(JsonObject event) {
-        strategy = EventStrategy.valueOf(event.get("type").getAsString());
+        strategy = EventStrategy.getStrategy(event.get("type").getAsString());
         DBObject query = new BasicDBObject("shipId", event.get("shipId").getAsInt());
         DBCursor cursor = collection.find(query);
         //if the ship with the given id exist

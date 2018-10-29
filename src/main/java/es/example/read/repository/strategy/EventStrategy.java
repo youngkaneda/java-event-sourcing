@@ -7,6 +7,9 @@ package es.example.read.repository.strategy;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -54,6 +57,14 @@ public enum EventStrategy {
 
     private EventStrategy(String value) {
         this.value = value;
+    }
+    
+    public static EventStrategy getStrategy(String value) {
+        List<EventStrategy> strategies = 
+                Arrays.asList(EventStrategy.values())
+                    .stream().filter((s) -> s.value.equals(value))
+                    .collect(Collectors.toList());
+        return strategies.size() == 1 ? strategies.get(0) : null;
     }
 
     public abstract void apply(JsonObject shipJson, JsonObject event);
