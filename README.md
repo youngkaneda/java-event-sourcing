@@ -13,6 +13,8 @@ java -cp target/classes/ es.example.Loader
 // and the logs will be printed
 ```
 
+You will need instal the [ActiveMQ](http://activemq.apache.org/) from Apache and create a topic named ```es.ship.Topic``` to make this example run correctly
+
 ## Future additions
 
 1. Transfer all the project to a Docker containers environment
