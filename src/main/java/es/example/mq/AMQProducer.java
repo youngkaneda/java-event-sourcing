@@ -10,7 +10,6 @@ import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
 import javax.jms.JMSException;
-import javax.jms.MessageConsumer;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
@@ -43,7 +42,7 @@ public class AMQProducer implements Producer{
     private void setConfig(String topicName) throws NamingException, JMSException {
         props = new Properties();
         props.setProperty(Context.INITIAL_CONTEXT_FACTORY, "org.apache.activemq.jndi.ActiveMQInitialContextFactory");
-        props.setProperty(Context.PROVIDER_URL, "tcp://localhost:61616");
+        props.setProperty(Context.PROVIDER_URL, "tcp://172.17.0.2:61616");
         props.setProperty("connectionFactoryNames", "connectionFactory");
         props.setProperty("topic.myTopic", topicName);
         ctx = new InitialContext(props);

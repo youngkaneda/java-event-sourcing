@@ -13,7 +13,7 @@ java -cp target/classes/ es.example.Loader
 // and the logs will be printed
 ```
 
-You will need instal the [ActiveMQ](http://activemq.apache.org/) from Apache and create a topic named ```es.ship.Topic``` to make this example run correctly
+This project use a message broker to share the events that happen and propagate them to the read database, to make it more easy to configure, was used a docker container to run a [ActiveMQ](http://activemq.apache.org/) broker, the respective dockerfile used can be found in [this](https://github.com/juanpablolvl99/alpine-activemq-dockerfile) link.
 
 ## Future additions
 
