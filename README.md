@@ -13,7 +13,7 @@ java -cp target/classes/ es.example.Loader
 // and the logs will be printed
 ```
 
-This project use a message broker to share the events that happen and propagate them to the read database, to make it more easy to configure, was used a docker container to run a [ActiveMQ](http://activemq.apache.org/) broker, the port used by this project to bind to the docker exposed port is **5555**. 
+This project use a message broker to share the events that happen and propagate them to the read database, to make it more easy to configure, was used a docker container to run a [ActiveMQ](http://activemq.apache.org/) broker.
 
 The respective dockerfile used can be found in [this](https://github.com/juanpablolvl99/alpine-activemq-dockerfile) link.
 
